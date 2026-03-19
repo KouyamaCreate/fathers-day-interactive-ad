@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+@theme {
+  --color-primary: #1a365d;
+  --color-secondary: #d4af37;
+  --color-accent: #ed8936;
+  --color-background: #f7fafc;
+  --color-foreground: #2d3748;
+}
+
 :root {
   --primary: #1a365d; /* Deep Blue */
   --secondary: #d4af37; /* Gold */

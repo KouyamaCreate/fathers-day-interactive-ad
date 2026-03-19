@@ -12,7 +12,7 @@ interface LineMockProps {
 
 export default function LineMock({ hobby, cryProb }: LineMockProps) {
   const [messages, setMessages] = useState<string[]>([]);
-  const templateMessage = `お父さん、久しぶりに飲みに行かない？AIで調べたら「${hobby}」の話題でお父さんが泣く確率${cryProb}%だったよ（笑）。ノンアル居酒屋予約しとくね！ https://example-fathers-day.vercel.app/invite`;
+  const templateMessage = `お父さん、ちょっと少し電話で話さない？ノンアル居酒屋ってサービスがあるからそこで話してみよ！リンクにアクセスしてみて！ https://fathersday.kouyama.design/demo`;
 
   useEffect(() => {
     // Simulate automatic message population or "sending"
@@ -65,7 +65,7 @@ export default function LineMock({ hobby, cryProb }: LineMockProps) {
               <div className="bg-[#7cfc00] text-black p-3 rounded-2xl rounded-tr-none max-w-[80%] text-sm shadow-sm relative">
                 {m.split(' ').map((part, idx) => (
                   part.startsWith('http') ? (
-                    <a key={idx} href="/next-experience" className="text-blue-700 underline block mt-2">
+                    <a key={idx} href="https://fathersday.kouyama.design/demo" target="_blank" rel="noopener noreferrer" className="text-blue-700 underline block mt-2">
                       {part}
                     </a>
                   ) : part

@@ -84,7 +84,7 @@ export default function ResultScreen({ hobby, reason }: ResultScreenProps) {
           <p className="text-sm opacity-60 mb-2">AIからのメッセージ</p>
           <h3 className="text-lg font-bold">
             「お父さんは今、あなたからの<br/>
-            一言を待っています。」
+            『{hobby}』にまつわる一言を待っています。」
           </h3>
         </motion.div>
 
@@ -93,7 +93,7 @@ export default function ResultScreen({ hobby, reason }: ResultScreenProps) {
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.6 }}
-          className="fixed bottom-10 inset-x-6 z-50 pointer-events-auto"
+          className="absolute bottom-10 inset-x-6 z-50 pointer-events-auto"
         >
           <motion.button
             whileTap={{ scale: 0.95 }}
@@ -103,7 +103,6 @@ export default function ResultScreen({ hobby, reason }: ResultScreenProps) {
             <MessageCircle size={24} />
             父をノンアル居酒屋に招待する
           </motion.button>
-          <p className="text-center text-[10px] mt-2 opacity-50">ボタンを押すとLINE風画面へ移行します</p>
         </motion.div>
       </div>
     </motion.div>
