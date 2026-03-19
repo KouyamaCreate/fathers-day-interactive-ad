@@ -8,18 +8,32 @@ import React from 'react';
  */
 export default function DemoPage() {
   return (
-    <main className="w-full h-screen overflow-hidden bg-gray-100 flex flex-col">
-      <div className="flex-1 w-full h-full relative">
-        <iframe 
-          src="/demo.pdf" 
-          className="absolute inset-0 w-full h-full border-none shadow-inner"
-          title="Manual PDF Preview"
+    <main className="w-full h-screen overflow-hidden bg-white flex flex-col">
+      <div className="flex-1 w-full h-full relative group">
+        <embed
+          src="/demo.pdf"
+          type="application/pdf"
+          className="w-full h-full border-none shadow-inner"
         />
-        {/* Fallback link if iframe has issues */}
-        <div className="absolute inset-x-0 bottom-4 text-center pointer-events-none">
-          <p className="text-xs text-gray-400 bg-white/80 inline-block px-3 py-1 rounded-full border border-gray-200 shadow-sm pointer-events-auto">
-            PDFが表示されない場合は <a href="/demo.pdf" className="text-blue-500 underline" target="_blank" rel="noopener noreferrer">こちらをクリック</a>
-          </p>
+        
+        {/* Floating Controls for Overlay */}
+        <div className="absolute top-4 right-4 flex gap-2">
+          <a 
+            href="/demo.pdf" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="bg-white/90 backdrop-blur-sm text-gray-800 px-4 py-2 rounded-lg text-sm font-bold shadow-lg border border-gray-200 hover:bg-white transition-all pointer-events-auto"
+          >
+            別タブで開く
+          </a>
+        </div>
+
+        {/* Dynamic Fallback if PDF fails */}
+        <div className="absolute inset-0 flex items-center justify-center -z-10 bg-gray-50">
+          <div className="text-center p-8">
+            <p className="text-gray-500 mb-4 font-medium">PDFを読み込んでいます...</p>
+            <p className="text-xs text-gray-400">表示されない場合は、右上の「別タブで開く」をお試しください。</p>
+          </div>
         </div>
       </div>
     </main>
