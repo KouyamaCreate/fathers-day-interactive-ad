@@ -26,6 +26,7 @@ const REASONS = [
 export default function DiagnosisFlow() {
   const [step, setStep] = useState<Step>('video');
   const [answers, setAnswers] = useState({ hobby: '', reason: '' });
+  const [videoEnded, setVideoEnded] = useState(false);
 
   // Simulate video end or "Tap to Start"
   const startDiagnosis = () => setStep('q1');
@@ -49,46 +50,31 @@ export default function DiagnosisFlow() {
 
   return (
     <div className="ad-container">
-      {/* Background Layer with Fallback Gradient */}
-      <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#1a365d] to-[#0f172a]">
-        <video 
-          className="w-full h-full object-cover opacity-60"
-          autoPlay 
-          muted 
-          loop 
-          playsInline
-          poster="https://images.unsplash.com/photo-1544145945-f904253d0c7b?auto=format&fit=crop&q=80&w=800"
-        >
-          {/* Fallback for video not loading */}
-        </video>
-        {/* Animated Bokeh Effect */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <motion.div 
-            animate={{ 
-              scale: [1, 1.2, 1],
-              opacity: [0.1, 0.3, 0.1],
-              x: [-20, 20, -20],
-              y: [-20, 20, -20]
-            }}
-            transition={{ repeat: Infinity, duration: 10 }}
-            className="absolute -top-1/4 -left-1/4 w-full h-full bg-accent rounded-full blur-[100px]"
-          />
-          <motion.div 
-            animate={{ 
-              scale: [1, 1.3, 1],
-              opacity: [0.1, 0.2, 0.1],
-              x: [20, -20, 20],
-              y: [20, -20, 20]
-            }}
-            transition={{ repeat: Infinity, duration: 15 }}
-            className="absolute -bottom-1/4 -right-1/4 w-full h-full bg-secondary rounded-full blur-[100px]"
-          />
-        </div>
-      </div>
-
+      {/* Background Layer (visible after intro) */}
+      <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#1a365d] to-[#0f172a]" />
 
       <AnimatePresence mode="wait">
-        {step === 'video' && (
+        {!videoEnded && (
+          <motion.div 
+            key="intro-video"
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+            className="absolute inset-0 z-50 bg-black"
+          >
+            <video 
+              className="w-full h-full object-cover"
+              autoPlay 
+              muted 
+              onEnded={() => setVideoEnded(true)}
+              playsInline
+            >
+              <source src="/intro.mp4" type="video/mp4" />
+            </video>
+          </motion.div>
+        )}
+
+        {step === 'video' && videoEnded && (
           <motion.div 
             key="video-overlay"
             initial={{ opacity: 0 }}
@@ -97,11 +83,11 @@ export default function DiagnosisFlow() {
             className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 text-white text-center cursor-pointer"
             onClick={startDiagnosis}
           >
-            <div className="absolute inset-0 bg-black/20" /> {/* Subtle dimming to make button pop */}
+            <div className="absolute inset-0 bg-black/20" />
             <motion.div 
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              transition={{ delay: 0.5, type: 'spring' }}
+              transition={{ type: 'spring' }}
               className="relative z-20 flex flex-col items-center"
             >
               <motion.div 
@@ -109,7 +95,7 @@ export default function DiagnosisFlow() {
                 transition={{ repeat: Infinity, duration: 1.5 }}
                 className="bg-white text-primary px-10 py-5 rounded-full font-black text-2xl shadow-[0_0_30px_rgba(255,255,255,0.4)] flex items-center gap-3"
               >
-                タップして診断開始
+                タップして診断を開始
               </motion.div>
               <p className="mt-8 text-lg font-medium tracking-widest drop-shadow-lg">
                 FATHER'S DAY 2024<br/>
@@ -117,7 +103,6 @@ export default function DiagnosisFlow() {
               </p>
             </motion.div>
           </motion.div>
-
         )}
 
         {step === 'q1' && (

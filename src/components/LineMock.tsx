@@ -104,7 +104,7 @@ export default function LineMock({ hobby, cryProb }: LineMockProps) {
         <div className="bg-black/80 text-white p-6 rounded-2xl text-center shadow-2xl">
           <Sparkles className="mx-auto mb-3 text-secondary" size={32} />
           <p className="font-bold mb-2">送信完了！</p>
-          <p className="text-xs opacity-70">上のリンクをクリックして<br/>お父さん側の体験を見に行こう</p>
+          <p className="text-xs opacity-70">上のリンクをクリックして<br/>お父さんと一緒にアクセスして久しぶりに盛り上がろう！</p>
         </div>
       </motion.div>
     </motion.div>
